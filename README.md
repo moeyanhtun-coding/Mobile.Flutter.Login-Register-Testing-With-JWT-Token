@@ -4,13 +4,13 @@ Login and Register Testing With JWT Token Authentication
 
 ## Getting Started
 
-## flutter pub get
+### flutter pub get
 
-## Dependencies
+### Dependencies
 
-> cupertino_icons: ^1.0.6
-> gap: ^3.0.1
-> get: ^4.6.6
+- cupertino_icons: ^1.0.6
+- gap: ^3.0.1
+- get: ^4.6.6
 
 This project is a starting point for a Flutter application.
 
