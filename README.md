@@ -4,7 +4,7 @@ Login and Register Testing With JWT Token Authentication
 
 ## Getting Started
 
-### flutter pub get
+Use the `flutter pub get` command to add dependencies your application.
 
 ### Dependencies
 
