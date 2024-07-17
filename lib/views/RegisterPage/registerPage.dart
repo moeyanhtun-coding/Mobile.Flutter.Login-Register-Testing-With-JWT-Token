@@ -14,26 +14,11 @@ class Registerpage extends StatefulWidget {
 class _RegisterpageState extends State<Registerpage> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(),
-        body: _buildUI(context),
-      ),
+    return Scaffold(
+      appBar: AppBar(),
+      body: _buildUI(context),
     );
   }
-
-  // SingleChildScrollView(
-  //         child: Container(
-  //           height: MediaQuery.of(context).size.height,
-  //           child: Column(
-  //             children: [
-  //               Expanded(child: _buildUI(context)),
-  //               _login(),
-  //             ],
-  //           ),
-  //         ),
-  //       ),
 
   Widget _buildUI(context) {
     return Container(
@@ -107,7 +92,9 @@ class _RegisterpageState extends State<Registerpage> {
 
   Widget _signUpButton(context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Get.toNamed('/home');
+      },
       style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
           padding: const EdgeInsets.symmetric(vertical: 10),

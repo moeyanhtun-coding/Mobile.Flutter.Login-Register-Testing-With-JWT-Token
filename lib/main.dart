@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ui_design_login_register/views/LoginPage/loginPage.dart';
 import 'package:ui_design_login_register/views/RegisterPage/registerPage.dart';
+import 'package:ui_design_login_register/views/homePage/homePage.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,6 +12,7 @@ class MyApp extends StatelessWidget {
   final routes = [
     GetPage(name: '/', page: () => const Loginpage()),
     GetPage(name: '/register', page: () => const Registerpage()),
+    GetPage(name: '/home', page: () => Homepage())
   ];
   MyApp({super.key});
 
