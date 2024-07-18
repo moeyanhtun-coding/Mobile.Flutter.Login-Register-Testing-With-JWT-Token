@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "230150763357",
+    "project_id": "messaging-b3970",
+    "storage_bucket": "messaging-b3970.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:230150763357:android:cca273a663c45d0249aeb4",
+        "android_client_info": {
+          "package_name": "com.example.ui_design_login_register"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLhzu1y5zdpF9NEAsNM6GOmnehViaFUrw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
