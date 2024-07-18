@@ -20,7 +20,7 @@ class _NotificationpageState extends State<Notificationpage> {
     final headers = {
       'Content-Type': 'application/json',
       'Authorization':
-          'key=MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDH+ZkkEe3WzzJP'
+          ''
     };
     final body = {
       "message": {
