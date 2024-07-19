@@ -93,7 +93,7 @@ class _RegisterpageState extends State<Registerpage> {
   Widget _signUpButton(context) {
     return ElevatedButton(
       onPressed: () {
-        Get.toNamed('/home');
+        Get.offAllNamed('/home');
       },
       style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
