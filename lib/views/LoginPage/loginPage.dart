@@ -3,6 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
+import 'package:ui_design_login_register/consts.dart';
+import 'package:ui_design_login_register/services/auth_service.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({super.key});
@@ -12,10 +15,23 @@ class Loginpage extends StatefulWidget {
 }
 
 class _LoginpageState extends State<Loginpage> {
+  final GetIt _getIt = GetIt.instance;
+  final GlobalKey<FormState> _LoginForm = GlobalKey();
+  late AuthService _authService;
+
+  String? email, password;
+
+  @override
+  void initState() {
+    super.initState();
+    _authService = _getIt.get<AuthService>();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: _buildUI(context, 0.15),
+    return Scaffold(
+      appBar: AppBar(),
+      body: _buildUI(context, 0.15),
     );
   }
 
@@ -43,17 +59,37 @@ class _LoginpageState extends State<Loginpage> {
   Widget _formGroup(context) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _inputField(context, "Username", 0.03, Icons.person, false),
-          _gap(context, 0.02),
-          _inputField(context, "Password", 0.03, Icons.password, true),
-          _gap(context, 0.02),
-          _loginButton(context),
-          _gap(context, 0.02),
-          _forgotPassword(),
-        ],
+      child: Form(
+        key: _LoginForm,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _inputField(context, "Email", 0.03, Icons.email, false,
+                EMAIL_VALIDATION_REGEX, (value) {
+              setState(() {
+                email = value;
+              });
+            }),
+            _gap(context, 0.02),
+            _inputField(
+              context,
+              "Password",
+              0.03,
+              Icons.password,
+              true,
+              PASSWORD_VALIDATION_REGEX,
+              (value) {
+                setState(() {
+                  password = value;
+                });
+              },
+            ),
+            _gap(context, 0.02),
+            _loginButton(context),
+            _gap(context, 0.02),
+            _forgotPassword(),
+          ],
+        ),
       ),
     );
   }
@@ -72,11 +108,24 @@ class _LoginpageState extends State<Loginpage> {
     );
   }
 
-  Widget _inputField(context, String formName, double borderRadius,
-      IconData icon, bool obscureText) {
+  Widget _inputField(
+      context,
+      String formName,
+      double borderRadius,
+      IconData icon,
+      bool obscureText,
+      RegExp validationRegEx,
+      Function(String?) onSaved) {
     return Column(
       children: [
-        TextField(
+        TextFormField(
+          onSaved: onSaved,
+          validator: (value) {
+            if (value != null && validationRegEx.hasMatch(value)) {
+              return null;
+            }
+            return "Enter a valid ${formName.toLowerCase()}";
+          },
           decoration: InputDecoration(
             hintText: formName,
             border: OutlineInputBorder(
@@ -95,7 +144,15 @@ class _LoginpageState extends State<Loginpage> {
 
   Widget _loginButton(context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () async {
+        if (_LoginForm.currentState?.validate() ?? false) {
+          _LoginForm.currentState?.save();
+          bool result = await _authService.Login(email!, password!);
+          if (result) {
+            Get.offAllNamed("/home");
+          }
+        }
+      },
       style: ElevatedButton.styleFrom(
           shape: const StadiumBorder(),
           padding: const EdgeInsets.symmetric(vertical: 10),
