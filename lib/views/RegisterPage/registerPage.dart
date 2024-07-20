@@ -113,7 +113,7 @@ class _RegisterpageState extends State<Registerpage> {
         const Text("Already have an account?"),
         TextButton(
           onPressed: () {
-            Get.offAllNamed('/');
+            Get.offAllNamed('/login');
           },
           child: const Text(
             "Sign In",
